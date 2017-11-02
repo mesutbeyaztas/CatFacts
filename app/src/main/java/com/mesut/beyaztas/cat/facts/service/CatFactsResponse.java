@@ -1,5 +1,10 @@
 package com.mesut.beyaztas.cat.facts.service;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+import com.mesut.beyaztas.cat.facts.BR;
+
 import java.util.List;
 
 /**
@@ -17,8 +22,18 @@ public class CatFactsResponse {
     public int to;
     public List<Data> data;
 
-    public static class Data {
+    public static class Data extends BaseObservable {
         public String fact;
         public int length;
+
+        @Bindable
+        public String getFact() {
+            return fact;
+        }
+
+        public void setFact(String fact) {
+            this.fact = fact;
+            notifyPropertyChanged(BR.catFact);
+        }
     }
 }

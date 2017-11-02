@@ -37,6 +37,11 @@ public class CatFactsRecyclerAdapter extends RecyclerView.Adapter<CatFactsRecycl
         holder.bind(catFacts.get(position));
     }
 
+    void updateItems(List<CatFactsResponse.Data> catFacts) {
+        this.catFacts = catFacts;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return catFacts.size();
@@ -53,6 +58,7 @@ public class CatFactsRecyclerAdapter extends RecyclerView.Adapter<CatFactsRecycl
 
         void bind(CatFactsResponse.Data catFact) {
             binding.setCatFact(catFact);
+            binding.executePendingBindings();
         }
     }
 

@@ -3,7 +3,7 @@ package com.mesut.beyaztas.cat.facts.ui;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.mesut.beyaztas.cat.facts.R;
 import com.mesut.beyaztas.cat.facts.databinding.ActivityMainBinding;
@@ -12,22 +12,36 @@ import com.mesut.beyaztas.cat.facts.service.CatFactsResponse;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements CatFactsPresenter.CatFactsPresenterListener {
+public class MainActivity extends AppCompatActivity implements CatFactsPresenter.CatFactsPresenterListener, View.OnClickListener {
 
-    private RecyclerView catFactsRecyclerView;
+    private ActivityMainBinding binding;
+    private CatFactsPresenter catFactsPresenter;
+    private CatFactsRecyclerAdapter catFactsRecyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        catFactsRecyclerView = binding.catFactsRecyclerView;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        CatFactsPresenter catFactsPresenter = new CatFactsPresenter(this);
-        catFactsPresenter.getCats(50, 50);
+        catFactsPresenter = new CatFactsPresenter(this);
+        binding.catFactsSearchView.setOnClickListener(this);
     }
 
     @Override
     public void catFactsReady(List<CatFactsResponse.Data> catFacts) {
-        catFactsRecyclerView.setAdapter(new CatFactsRecyclerAdapter(catFacts));
+        if (catFactsRecyclerAdapter == null) {
+            catFactsRecyclerAdapter = new CatFactsRecyclerAdapter(catFacts);
+            binding.catFactsRecyclerView.setAdapter(new CatFactsRecyclerAdapter(catFacts));
+        } else {
+            catFactsRecyclerAdapter.updateItems(catFacts);
+            catFactsRecyclerAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        int randomNumber = catFactsPresenter.getRandomNumber();
+        String maxLength = binding.catFactsEditText.getText().toString().trim();
+        catFactsPresenter.getCats(randomNumber, Integer.valueOf(maxLength));
     }
 }

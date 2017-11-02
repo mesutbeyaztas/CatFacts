@@ -44,4 +44,9 @@ public class CatFactsPresenter {
                     }
                 });
     }
+
+    public int getRandomNumber() {
+        int totalFactCount = 312;
+        return (int) (Math.random() * totalFactCount);
+    }
 }
