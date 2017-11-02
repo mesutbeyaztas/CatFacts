@@ -3,6 +3,7 @@ package com.mesut.beyaztas.cat.facts.ui;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 
 import com.mesut.beyaztas.cat.facts.R;
 import com.mesut.beyaztas.cat.facts.databinding.ActivityMainBinding;
@@ -13,10 +14,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CatFactsPresenter.CatFactsPresenterListener {
 
+    private RecyclerView catFactsRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        catFactsRecyclerView = binding.catFactsRecyclerView;
 
         CatFactsPresenter catFactsPresenter = new CatFactsPresenter(this);
         catFactsPresenter.getCats(50, 50);
@@ -24,6 +28,6 @@ public class MainActivity extends AppCompatActivity implements CatFactsPresenter
 
     @Override
     public void catFactsReady(List<CatFactsResponse.Data> catFacts) {
-
+        catFactsRecyclerView.setAdapter(new CatFactsRecyclerAdapter(catFacts));
     }
 }
