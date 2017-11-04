@@ -3,7 +3,6 @@ package com.mesut.beyaztas.cat.facts;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.mesut.beyaztas.cat.facts.databinding.ItemCatFactsBinding;
@@ -43,6 +42,11 @@ public class CatFactsRecyclerAdapter extends RecyclerView.Adapter<CatFactsRecycl
         notifyDataSetChanged();
     }
 
+    void clear() {
+        this.catFacts.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return catFacts.size();
@@ -56,12 +60,8 @@ public class CatFactsRecyclerAdapter extends RecyclerView.Adapter<CatFactsRecycl
         CatFactsViewHolder(ItemCatFactsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.catFactsItemShare.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ShareUtils.shareText(view.getContext(), catFact.getFact());
-                }
-            });
+            binding.catFactsItemShare.setOnClickListener(view ->
+                    ShareUtils.shareText(view.getContext(), catFact.getFact()));
         }
 
         void bind(CatFactsResponse.Data catFact) {

@@ -13,6 +13,7 @@
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
             android:hint="@string/max_length"
+            android:imeOptions="actionDone"
             android:inputType="number"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/catFactsSearchView"

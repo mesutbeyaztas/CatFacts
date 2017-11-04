@@ -21,6 +21,7 @@ public class CatFactsPresenter implements CatFactsContract.Presenter {
     }
 
     public void getCats(Integer limit, Integer maxLength) {
+        catFactsView.hideKeyboard();
         catFactsView.showProgress();
         catFactsService
                 .getAPI()
