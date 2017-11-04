@@ -14,6 +14,8 @@ public interface CatFactsContract {
         void hideProgress();
 
         void hideKeyboard();
+
+        void showItemNotFound();
     }
 
     interface Presenter {

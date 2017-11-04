@@ -31,8 +31,12 @@ public class CatFactsPresenter implements CatFactsContract.Presenter {
                     public void onResponse(Call<CatFactsResponse> call, Response<CatFactsResponse> response) {
                         catFactsView.hideProgress();
                         CatFactsResponse result = response.body();
-                        if (result != null)
+                        if (result != null) {
+                            if (result.data.size() == 0) {
+                                catFactsView.showItemNotFound();
+                            }
                             catFactsView.updateCatFactsAdapter(result.data);
+                        }
                     }
 
                     @Override

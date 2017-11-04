@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Cat Facts</string>
     <string name="max_length">Max Length</string>
+    <string name="cat_facts_not_found">Cat Facts Not Found</string>
 </resources>

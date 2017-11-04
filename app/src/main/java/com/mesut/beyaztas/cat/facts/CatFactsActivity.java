@@ -51,6 +51,7 @@ public class CatFactsActivity extends AppCompatActivity implements CatFactsContr
 
     @Override
     public void showProgress() {
+        binding.catFactsNotFoundView.setVisibility(View.GONE);
         binding.catFactsProgressBar.setVisibility(View.VISIBLE);
         if (catFactsRecyclerAdapter != null)
             catFactsRecyclerAdapter.clear();
@@ -64,6 +65,11 @@ public class CatFactsActivity extends AppCompatActivity implements CatFactsContr
     @Override
     public void hideKeyboard() {
         KeyboardUtils.hideKeyboard(this, binding.catFactsEditText);
+    }
+
+    @Override
+    public void showItemNotFound() {
+        binding.catFactsNotFoundView.setVisibility(View.VISIBLE);
     }
 
     @Override
