@@ -1,11 +1,10 @@
-package com.mesut.beyaztas.cat.facts.ui;
+package com.mesut.beyaztas.cat.facts;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.mesut.beyaztas.cat.facts.R;
 import com.mesut.beyaztas.cat.facts.databinding.ItemCatFactsBinding;
 import com.mesut.beyaztas.cat.facts.service.CatFactsResponse;
 
